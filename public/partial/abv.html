@@ -1,0 +1,39 @@
+<h3>Alcohol by Volume (ABV) Calculator</h3>
+
+<div class="row-fluid">
+<div class="span2">
+  <span>Starting Gravity (SG): </span>
+  <input ng-model="sg" ng-change="calcAbv()" type="number" value="1.040" step="0.001" style="width: 100px;" />
+</div>
+<div class="span2">
+  <span>Final Gravity (FG): </span>
+  <input ng-model="fg" ng-change="calcAbv()" type="number" value="1.010" step="0.001" style="width: 100px;" />
+</div>
+<div class="span2">
+  <span>ABV: </span>
+  <input ng-model="abv" type="text" value="0.00%" readonly="true" style="width: 100px;" />
+</div>
+</div>
+
+<div class="row-fluid">
+<div class="span4">
+    <label class="checkbox" for"inputBottleCondition">
+      <input ng-change="calcAbv()" ng-model="bottleConditioned" type="checkbox" value="Bottle Conditioned" id="inputBottleCondition" />
+      Bottle Conditioned?
+    </label>            
+</div>
+<div class="span2">
+  <input type="button" value="Calculate" id="btnCalc" />
+</div>
+</div>
+
+<div class="row-fluid">
+<div class="span12 spacedContent">
+  <p>
+    This isn't original work. The calculations for this were based on <a href="http://pint.com.au/calculators/alcohol/">existing calculations</a> and some <a href="http://aussiehomebrewer.com/topic/28165-online-alcohol-calculators/">forum discussion</a>.
+  </p>
+  <p>
+    Still remaining is to implement options for different algorithms or use the table of factors from the <a href="http://pint.com.au/calculators/alcohol/">existing calculations</a>.
+  </p>
+</div>
+</div>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="BrewingTools">
+  <head>
+    <title>Sim's Brewing Tools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="/assets/stylesheets/common.css" rel="stylesheet">
+    <link href="/assets/stylesheets/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
+    
+    <script src="/assets/javascripts/jquery-1.9.1.js"></script>
+    <script src="/assets/javascripts/bootstrap.min.js"></script>
+    <script src="/assets/javascripts/angular.js"></script>
+    <script src="/assets/javascripts/page.js"></script>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <h1>Simple Brewing Tools</h1>
+
+      <div ng-controller="MenuController" class="navbar">
+        <div class="navbar-inner">
+          <a class="brand" href="#">Tools</a>
+          <ul class="nav">
+            <li ng-class="{active: isActive(menuItem.url)}" ng-repeat="menuItem in menuItems" ng>
+              <a ng-href="#{{menuItem.url}}">{{menuItem.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div ng-view>
+      </div>
+    </div> <!-- End of page container div -->
+
+  </body>
+</html>
