@@ -43,7 +43,7 @@ brewingTools.config(routeConfig);
 function MenuController( $scope, $location ) {
 
   $scope.menuItems = [{url: '/abv', name: 'ABV Calculator'},
-                      {url: '/ibu', name: 'IBU Calculator'}];
+                      {url: '/ibu', name: 'Hop Addition IBU Calculator'}];
 
   $scope.isActive = function(url)
   {
@@ -66,5 +66,18 @@ function AbvController( $scope, AbvCalculator ) {
 }
 
 function IbuController( $scope ) {
+
+  $scope.sg = 1.040;
+  $scope.boilTime = 60;
+  $scope.hopAlphaAcid = 11.9;
+  $scope.hopQuantity = 15;
+  $scope.hopBoilTime = 45;
+  $scope.ibus = 0;
+
+  $scope.calculate = function() {
+    
+  };
+
+
 
 }
