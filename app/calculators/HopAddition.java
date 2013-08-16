@@ -17,6 +17,7 @@ public class HopAddition implements QueryStringBindable<HopAddition>
     private double hopsInGms;
     private double hopsAddedTimeInMins;
     private double boilVolume;
+    private double boilDuration;
 
     public double getOpeningGravity()
     {
@@ -66,6 +67,13 @@ public class HopAddition implements QueryStringBindable<HopAddition>
         this.boilVolume = boilVolume;
     }
 
+    public double getBoilDuration() {
+        return boilDuration;
+    }
+
+    public void setBoilDuration(double boilDuration) {
+        this.boilDuration = boilDuration;
+    }
 
     @Override
     public F.Option<HopAddition> bind(String s, Map<String, String[]> stringMap)
@@ -77,6 +85,7 @@ public class HopAddition implements QueryStringBindable<HopAddition>
             setHopsAddedTimeInMins(Double.parseDouble(stringMap.get("hopsBoilTime")[0]));
             setHopsInGms(Double.parseDouble(stringMap.get("hopsInGms")[0]));
             setBoilVolume(Double.parseDouble(stringMap.get("boilVolume")[0]));
+            setBoilDuration(Double.parseDouble(stringMap.get("boilDuration")[0]));
         } catch (NumberFormatException e)
         {
             return F.Option.None();

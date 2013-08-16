@@ -77,9 +77,16 @@ function IbuController( $scope, IbuQueryCalc ) {
   $scope.hopQuantity = 15;
   $scope.hopBoilTime = 45;
   $scope.ibus = 0;
+  $scope.boilVolume = 22.0;
 
   $scope.calculate = function() {
-      IbuQueryCalc.get({openingGravity: $scope.sg, alphaAcidLevel: $scope.hopAlphaAcid, hopsBoilTime: $scope.hopBoilTime, hopsInGms: $scope.hopQuantity, boilVolume: $scope.hop },
+      IbuQueryCalc.get({openingGravity: $scope.sg,
+              alphaAcidLevel: $scope.hopAlphaAcid,
+              hopsBoilTime: $scope.hopBoilTime,
+              hopsInGms: $scope.hopQuantity,
+              boilVolume: $scope.boilVolume,
+              boilDuration: $scope.boilTime },
+
           function (data) {
          $scope.ibus = data.ibu;
           console.log( data.ibu);
