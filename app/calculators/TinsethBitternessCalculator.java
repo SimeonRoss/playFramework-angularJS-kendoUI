@@ -6,13 +6,12 @@ public class TinsethBitternessCalculator implements BitternessCalculator
 {
 	// TODO constructor, probably from a factory
 
-	public double calculateIBUs( double openingGravity, double alphaAcidLevel, double hopsInGms, double hopsAddedTimeInMins, double boilVolume )
+	public double calculateIBUs( HopAddition addition )
 	{
-		double bigFactor = getBigFactor( openingGravity );
-		double boilTimeFactor = getBoilTimeFactor( hopsAddedTimeInMins );
+		double bigFactor = getBigFactor( addition.getOpeningGravity() );
+		double boilTimeFactor = getBoilTimeFactor( addition.getHopsAddedTimeInMins() );
 		double decimalAAUtil = bigFactor * boilTimeFactor;
-		double mgPerL = getAlphaAcidConcentration( alphaAcidLevel / 100, hopsInGms,
-				boilVolume );
+		double mgPerL = getAlphaAcidConcentration( addition.getAlphaAcidLevel() / 100, addition.getHopsInGms(), addition.getBoilVolume() );
 
 		double ibu = decimalAAUtil * mgPerL;
 

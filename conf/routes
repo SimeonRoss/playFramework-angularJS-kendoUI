@@ -4,6 +4,7 @@
 
 # Home page
 GET		 /						controllers.Application.sap()
+GET      /rest/ibu/calc         controllers.IbuController.calcIndividualIbu(addition : calculators.HopAddition)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

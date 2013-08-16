@@ -1,5 +1,5 @@
 
-var brewingTools = angular.module('BrewingTools', []);
+var brewingTools = angular.module('BrewingTools', ['ngResource']);
 
 brewingTools.factory('AbvCalculator', function() {
     var abvCalculator = {};
@@ -22,6 +22,10 @@ brewingTools.factory('AbvCalculator', function() {
 
     return abvCalculator;
 });
+
+brewingTools.factory('IbuQueryCalc', ['$resource', function($resource) {
+    return $resource('/rest/ibu/calc');
+}]);
 
 // Set up our mappings between URLs, templates, and controllers
 function routeConfig($routeProvider) {
@@ -65,7 +69,7 @@ function AbvController( $scope, AbvCalculator ) {
   $scope.calcAbv();
 }
 
-function IbuController( $scope ) {
+function IbuController( $scope, IbuQueryCalc ) {
 
   $scope.sg = 1.040;
   $scope.boilTime = 60;
@@ -75,9 +79,11 @@ function IbuController( $scope ) {
   $scope.ibus = 0;
 
   $scope.calculate = function() {
-    
+      IbuQueryCalc.get({openingGravity: $scope.sg, alphaAcidLevel: $scope.hopAlphaAcid, hopsBoilTime: $scope.hopBoilTime, hopsInGms: $scope.hopQuantity, boilVolume: $scope.hop },
+          function (data) {
+         $scope.ibus = data.ibu;
+          console.log( data.ibu);
+      });
   };
-
-
 
 }
