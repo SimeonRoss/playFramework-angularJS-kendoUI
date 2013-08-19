@@ -38,21 +38,30 @@ function routeConfig($routeProvider) {
       controller: IbuController,
       templateUrl: '/assets/partial/ibu.html'
     }).
+    when('/', {
+      controller: AboutController,
+      templateUrl: '/assets/partial/about.html'
+    }).
     otherwise({
-      redirectTo: '/abv'
+      redirectTo: '/'
     });
 }
 brewingTools.config(routeConfig);
 
 function MenuController( $scope, $location ) {
 
-  $scope.menuItems = [{url: '/abv', name: 'ABV Calculator'},
+  $scope.menuItems = [{url: '/', name: 'About'},
+                      {url: '/abv', name: 'ABV Calculator'},
                       {url: '/ibu', name: 'Hop Addition IBU Calculator'}];
 
   $scope.isActive = function(url)
   {
     return url === $location.path();
   };
+}
+
+function AboutController( $scope ) {
+  
 }
 
 function AbvController( $scope, AbvCalculator ) {
