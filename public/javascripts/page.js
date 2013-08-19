@@ -91,7 +91,7 @@ function IbuController( $scope, IbuQueryCalc ) {
   $scope.calculate = function() {
       IbuQueryCalc.get({openingGravity: $scope.sg,
               alphaAcidLevel: $scope.hopAlphaAcid,
-              hopsBoilTime: $scope.hopBoilTime,
+              hopsAddedTimeInMins: $scope.hopBoilTime,
               hopsInGms: $scope.hopQuantity,
               boilVolume: $scope.boilVolume,
               boilDuration: $scope.boilTime },

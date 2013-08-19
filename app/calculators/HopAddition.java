@@ -1,15 +1,11 @@
 package calculators;
 
+import org.springframework.beans.DirectFieldAccessor;
 import play.libs.F;
 import play.mvc.QueryStringBindable;
 
 import java.util.Map;
 
-/**
- * @author RossS
- *         Date: 16/08/13
- *         Time: 2:33 PM
- */
 public class HopAddition implements QueryStringBindable<HopAddition>
 {
     private double openingGravity;
@@ -67,39 +63,39 @@ public class HopAddition implements QueryStringBindable<HopAddition>
         this.boilVolume = boilVolume;
     }
 
-    public double getBoilDuration() {
+    public double getBoilDuration()
+    {
         return boilDuration;
     }
 
-    public void setBoilDuration(double boilDuration) {
+    public void setBoilDuration(double boilDuration)
+    {
         this.boilDuration = boilDuration;
     }
 
     @Override
     public F.Option<HopAddition> bind(String s, Map<String, String[]> stringMap)
     {
-        try
+        DirectFieldAccessor dfa = new DirectFieldAccessor(this);
+        for (String key : stringMap.keySet())
         {
-            setOpeningGravity(Double.parseDouble(stringMap.get("openingGravity")[0]));
-            setAlphaAcidLevel(Double.parseDouble(stringMap.get("alphaAcidLevel")[0]));
-            setHopsAddedTimeInMins(Double.parseDouble(stringMap.get("hopsBoilTime")[0]));
-            setHopsInGms(Double.parseDouble(stringMap.get("hopsInGms")[0]));
-            setBoilVolume(Double.parseDouble(stringMap.get("boilVolume")[0]));
-            setBoilDuration(Double.parseDouble(stringMap.get("boilDuration")[0]));
-        } catch (NumberFormatException e)
-        {
-            return F.Option.None();
+            if (dfa.isWritableProperty(key))
+            {
+                dfa.setPropertyValue(key, stringMap.get(key)[0]);
+            }
         }
         return F.Option.Some(this);
     }
 
     @Override
-    public String unbind(String s) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public String unbind(String s)
+    {
+        return null;
     }
 
     @Override
-    public String javascriptUnbind() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public String javascriptUnbind()
+    {
+        return null;
     }
 }
