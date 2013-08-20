@@ -12,7 +12,7 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     javaEbean,
-    "springframework" % "spring-beans" % "1.2.6",
+    "org.springframework" % "spring-beans" % "1.2.6",
     "com.google.inject" % "guice" % "3.0"
   )
 
