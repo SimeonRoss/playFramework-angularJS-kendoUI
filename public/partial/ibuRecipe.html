@@ -1,0 +1,77 @@
+<h3>Recipe IBU Calculator</h3>
+
+<div class="row-fluid">
+	<div class="span6">
+		<strong>Recipe Properties</strong>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span2">
+	  <span>Starting Gravity (SG): </span>
+	  <input kendo-numeric-text-box k-min="0.900" k-format="'#.000'" k-step="0.001" ng-model="sg" style="width: 100px;" />
+	</div>
+	<div class="span2">
+	  <span>Boil Time (mins): </span>	  
+	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="boilTime" style="width: 100px;" />
+	</div>
+    <div class="span2">
+        <span>Boil Volume (L): </span>
+        <input kendo-numeric-text-box k-min="1" k-format="'#.0'" k-step="0.1" ng-model="boilVolume" style="width: 100px;" />
+    </div>
+</div>
+
+<br />
+
+<div class="row-fluid">
+	<div class="span6">
+		<strong>Hop Additions</strong>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div kendo-grid k-data-source="hopAdditions" 
+       		k-pageable='{ "refresh": false, "pageSizes": false }'
+       		k-columns='[{ "field": "hop.name", "title": "Hop"},
+       					{ "field": "hop.alphaAcid", "title": "Alpha Acid"},
+       					{ "field": "quantity", "title": "Quantity (g)"},
+       					{ "field": "additionTime", "title": "Boil Time  (min)"}]'
+        	k-sortable="true", k-groupable="false", k-filterable="false">
+ 		</div>
+	</div>
+</div>
+
+<br />
+<form name="additionForm">
+<div class="row-fluid">
+	<div class="span6">
+		<strong>Add Hop Addition</strong>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span2">
+	  <span>Hop:</span><br />
+	  <select kendo-drop-down-list
+        	k-option-label="'Select a Hop'"
+        	k-data-text-field="'name'"
+        	k-data-value-field="'id'"
+        	k-data-source="hops"
+        	ng-model="selectedHop">
+       </select>
+       <small>{{ alpaAcid }}</small>	  
+	</div>
+	<div class="span2">
+	  <span>Quantity (g): </span>
+	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="hopQuantity" style="width: 100px;" />
+	</div>
+	<div class="span2">
+	  <span>Addition Time (mins): </span>
+	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="hopBoilTime" style="width: 100px;" />
+	</div>
+</div>
+<br />
+<div class="row-fluid">
+	<div class="span6">
+		<input class="k-button" type="button" value="Add" ng-click="addHop(additionForm)" />
+	</div>
+</div>
+</form>

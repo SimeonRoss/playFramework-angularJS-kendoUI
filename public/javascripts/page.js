@@ -1,5 +1,5 @@
 
-var brewingTools = angular.module('BrewingTools', ['ngResource']);
+var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directives']);
 
 brewingTools.factory('AbvCalculator', function() {
     var abvCalculator = {};
@@ -38,6 +38,10 @@ function routeConfig($routeProvider) {
       controller: IbuController,
       templateUrl: '/assets/partial/ibu.html'
     }).
+    when('/ibuRecipe', {
+      controller: IbuRecipeController,
+      templateUrl: '/assets/partial/ibuRecipe.html'
+    }).
     when('/', {
       controller: AboutController,
       templateUrl: '/assets/partial/about.html'
@@ -51,8 +55,9 @@ brewingTools.config(routeConfig);
 function MenuController( $scope, $location ) {
 
   $scope.menuItems = [{url: '/', name: 'About'},
-                      {url: '/abv', name: 'ABV Calculator'},
-                      {url: '/ibu', name: 'Hop Addition IBU Calculator'}];
+                      {url: '/abv',       name: 'ABV Calculator'},
+                      {url: '/ibu',       name: 'Hop Addition IBU Calculator'},
+                      {url: '/ibuRecipe', name: 'Recipe IBU Calculator'}];
 
   $scope.isActive = function(url)
   {
@@ -60,8 +65,7 @@ function MenuController( $scope, $location ) {
   };
 }
 
-function AboutController( $scope ) {
-  
+function AboutController( $scope ) {  
 }
 
 function AbvController( $scope, AbvCalculator ) {
@@ -101,5 +105,51 @@ function IbuController( $scope, IbuQueryCalc ) {
           console.log( data.ibu);
       });
   };
+
+}
+
+function IbuRecipeController( $scope ) {
+  $scope.hops = new kendo.data.DataSource({
+    transport: {
+      read: "/assets/data/hops.json"
+    },
+    schema: {
+      model: { id: "id" }
+    }
+  });
+  $scope.hopAdditions = new kendo.data.DataSource({
+    data: [ ]
+  });
+  $scope.hopQuantity = 10;
+  $scope.hopBoilTime = 1;  
+  $scope.selectedHop = -1;
+  $scope.alpaAcid = '';
+  $scope.boilTime = 60;
+  $scope.boilVolume = 22.0;
+  $scope.sg = 1.040;
+
+  $scope.setAlphaAcid = function() {
+    var hop = $scope.hops.get($scope.selectedHop);
+    if (hop == null)
+    {
+      $scope.alpaAcid = '';
+    } else {
+      $scope.alpaAcid = hop.alphaAcid + '% alpha acid';
+    }
+  };
+
+  $scope.addHop = function(additionForm) {
+    
+    var selHop = $scope.hops.get($scope.selectedHop);
+    if (selHop != null) {
+      var addition = { quantity: $scope.hopQuantity, additionTime: $scope.hopBoilTime, hop: selHop};
+      $scope.hopAdditions.add(addition);
+    } 
+    // $scope.additionForm.$setPristine();
+  };
+
+  $scope.$watch('selectedHop', function() {
+    $scope.setAlphaAcid(); 
+  });
 
 }
