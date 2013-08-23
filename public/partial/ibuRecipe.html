@@ -55,10 +55,15 @@
 	        	k-data-text-field="'name'"
 	        	k-data-value-field="'id'"
 	        	k-data-source="hops"
+	        	k-value="'null'"
 	        	ng-model="selectedHop"
-	        	ng-change="onChanges()">
+	        	ng-change="onChanges()"
+	        	ng-required="true"
+	        	name="selectedHop">
 	       </select>
+
 	       <small>{{ alpaAcid }}</small>	  
+	       <span class="help-inline" ng-show="additionForm.selectedHop.$error.required">Required</span>
 		</div>
 		<div class="span2">
 		  <span>Quantity (g): </span>
@@ -77,7 +82,7 @@
 	<br />
 	<div class="row-fluid">
 		<div class="span6">
-			<input class="k-button" ng-disabled="!additionForm.$valid" type="button" value="Add" ng-click="addHop()" />
+			<input class="k-button" ng-class="{'k-state-disabled': !additionForm.$valid}" ng-disabled="!additionForm.$valid" type="button" value="Add" ng-click="addHop()" />
 		</div>	
 	</div>
 </form>

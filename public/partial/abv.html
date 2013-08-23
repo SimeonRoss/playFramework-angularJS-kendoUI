@@ -3,15 +3,16 @@
 <div class="row-fluid">
 <div class="span2">
   <span>Starting Gravity (SG): </span>
-  <input ng-model="sg" ng-change="calcAbv()" type="number" value="1.040" step="0.001" style="width: 100px;" />
+  <input kendo-numeric-text-box k-min="0.900" k-max="1.200" k-format="'#.000'" k-step="0.001" k-decimals="3" ng-model="sg" ng-change="calcAbv()" style="width: 100px;" />
 </div>
 <div class="span2">
   <span>Final Gravity (FG): </span>
-  <input ng-model="fg" ng-change="calcAbv()" type="number" value="1.010" step="0.001" style="width: 100px;" />
+  <input kendo-numeric-text-box k-min="0.900" k-max="1.200" k-format="'#.000'" k-step="0.001" k-decimals="3" ng-model="fg" k-on-change="calcAbv()" style="width: 100px;" />  
+  <!-- <input ng-model="fg" ng-change="calcAbv()" type="number" value="1.010" step="0.001" style="width: 100px;" /> -->
 </div>
 <div class="span2">
-  <span>ABV: </span>
-  <input ng-model="abv" type="text" value="0.00%" readonly="true" style="width: 100px;" />
+  <span>ABV: </span><br />
+  <input type="text" class="k-textbox" ng-model="abv" readonly="true" style="width: 100px;" />
 </div>
 </div>
 
@@ -23,7 +24,7 @@
     </label>            
 </div>
 <div class="span2">
-  <input type="button" value="Calculate" id="btnCalc" />
+  <input type="button" value="Calculate" id="btnCalc" class="k-button" />
 </div>
 </div>
 

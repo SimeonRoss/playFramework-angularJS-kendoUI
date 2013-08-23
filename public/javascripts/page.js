@@ -75,7 +75,7 @@ function AbvController( $scope, AbvCalculator ) {
   $scope.abv = 0;
   $scope.bottleConditioned = false;
 
-  $scope.calcAbv = function() {
+  $scope.calcAbv = function(e) {
     $scope.abv = AbvCalculator.calculate($scope.sg, $scope.fg, $scope.bottleConditioned) + '%';
   };
 
@@ -128,7 +128,7 @@ function IbuRecipeController( $scope ) {
 }
 
 function AddHopToRecipeFormController( $scope ) {
-  $scope.selectedHop = -1;
+  // $scope.selectedHop = null;
   $scope.hopQuantity = 10;
   $scope.hopBoilTime = 1;  
   $scope.hopAdditionIbus = 0;
