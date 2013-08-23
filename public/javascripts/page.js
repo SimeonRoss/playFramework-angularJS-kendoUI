@@ -120,13 +120,19 @@ function IbuRecipeController( $scope ) {
   $scope.hopAdditions = new kendo.data.DataSource({
     data: [ ]
   });
-  $scope.hopQuantity = 10;
-  $scope.hopBoilTime = 1;  
-  $scope.selectedHop = -1;
-  $scope.alpaAcid = '';
+  
+
   $scope.boilTime = 60;
   $scope.boilVolume = 22.0;
   $scope.sg = 1.040;
+}
+
+function AddHopToRecipeFormController( $scope ) {
+  $scope.selectedHop = -1;
+  $scope.hopQuantity = 10;
+  $scope.hopBoilTime = 1;  
+  $scope.hopAdditionIbus = 0;
+  $scope.alpaAcid = '';
 
   $scope.setAlphaAcid = function() {
     var hop = $scope.hops.get($scope.selectedHop);
@@ -139,13 +145,16 @@ function IbuRecipeController( $scope ) {
   };
 
   $scope.addHop = function(additionForm) {
-    
+
     var selHop = $scope.hops.get($scope.selectedHop);
     if (selHop != null) {
       var addition = { quantity: $scope.hopQuantity, additionTime: $scope.hopBoilTime, hop: selHop};
       $scope.hopAdditions.add(addition);
     } 
-    // $scope.additionForm.$setPristine();
+  };
+
+  $scope.onChanges = function() {
+    // if (selectedHop != -1 && hopQuantity > 0 &&)
   };
 
   $scope.$watch('selectedHop', function() {
