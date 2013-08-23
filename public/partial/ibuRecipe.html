@@ -8,7 +8,7 @@
 <div class="row-fluid">
 	<div class="span2">
 	  <span>Starting Gravity (SG): </span>
-	  <input kendo-numeric-text-box k-min="0.900" k-format="'#.000'" step="0.01" ng-model="sg" style="width: 100px;" />
+	  <input kendo-numeric-text-box k-min="0.900" k-format="'#.000'" k-step="0.001" k-decimals="3" ng-model="sg" style="width: 100px;" />
 	</div>
 	<div class="span2">
 	  <span>Boil Time (mins): </span>	  
@@ -41,7 +41,7 @@
 </div>
 
 <br />
-<form name="additionForm">
+<form name="additionForm" ng-controller="AddHopToRecipeFormController">
 	<div class="row-fluid">
 		<div class="span6">
 			<strong>Add Hop Addition</strong>
@@ -55,18 +55,23 @@
 	        	k-data-text-field="'name'"
 	        	k-data-value-field="'id'"
 	        	k-data-source="hops"
-	        	ng-model="selectedHop">
+	        	ng-model="selectedHop"
+	        	ng-change="onChanges()">
 	       </select>
 	       <small>{{ alpaAcid }}</small>	  
 		</div>
 		<div class="span2">
 		  <span>Quantity (g): </span>
-		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="hopQuantity" style="width: 100px;" />
+		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="hopQuantity" ng-change="onChanges()" style="width: 100px;" />
 		</div>
 		<div class="span2">
 		  <span>Addition Time (mins): </span>
-		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="hopBoilTime" name="hopBoilTime" style="width: 100px;" required />
+		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="hopBoilTime" ng-change="onChanges()" name="hopBoilTime" style="width: 100px;" required />
 		  <span class="help-inline" ng-show="additionForm.hopBoilTime.$error.required">Required</span>
+		</div>
+		<div class="span2">
+			<span>IBUs:</span>
+			<input type="text" class="k-textbox" readonly="true" ng-model="hopAdditionIbus" />
 		</div>
 	</div>
 	<br />
