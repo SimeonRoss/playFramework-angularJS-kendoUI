@@ -127,7 +127,7 @@ function IbuRecipeController( $scope ) {
   $scope.sg = 1.040;
 }
 
-function AddHopToRecipeFormController( $scope ) {
+function AddHopToRecipeFormController( $scope, IbuQueryCalc ) {
   // $scope.selectedHop = null;
   $scope.hopQuantity = 10;
   $scope.hopBoilTime = 1;  
@@ -154,7 +154,24 @@ function AddHopToRecipeFormController( $scope ) {
   };
 
   $scope.onChanges = function() {
-    // if (selectedHop != -1 && hopQuantity > 0 &&)
+    console.log('sigh');
+    if ($scope.selectedHop > 0 && $scope.hopQuantity > 0 && $scope.hopBoilTime > 0)
+    {
+        IbuQueryCalc.get({openingGravity: $scope.sg,
+              alphaAcidLevel: $scope.hops.get($scope.selectedHop).alphaAcid,
+              hopsAddedTimeInMins: $scope.hopBoilTime,
+              hopsInGms: $scope.hopQuantity,
+              boilVolume: $scope.boilVolume,
+              boilDuration: $scope.boilTime },
+
+          function (data) {
+         $scope.hopAdditionIbus = data.ibu;
+          console.log( data.ibu);
+      });
+    } else
+    {
+      $scope.hopAdditionIbus = 0;
+    }
   };
 
   $scope.$watch('selectedHop', function() {

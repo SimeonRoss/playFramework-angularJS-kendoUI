@@ -57,29 +57,28 @@
 	        	k-data-source="hops"
 	        	k-value="'null'"
 	        	ng-model="selectedHop"
-	        	ng-change="onChanges()"
+	        	k-on-change="onChanges()"
 	        	ng-required="true"
 	        	name="selectedHop">
 	       </select>
-
-	       <small>{{ alpaAcid }}</small>	  
-	       <span class="help-inline" ng-show="additionForm.selectedHop.$error.required">Required</span>
+	       <span class="requiredStar" ng-show="additionForm.selectedHop.$error.required">*</span>
+	       <small>{{ alpaAcid }}</small>
 		</div>
 		<div class="span2">
 		  <span>Quantity (g): </span>
-		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="hopQuantity" ng-change="onChanges()" style="width: 100px;" />
+		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" name="hopQuantity" ng-model="hopQuantity" ng-change="onChanges()" style="width: 100px;" />
+		  <span class="requiredStar" ng-show="additionForm.hopQuantity.$error.required">*</span>
 		</div>
 		<div class="span2">
 		  <span>Addition Time (mins): </span>
 		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="hopBoilTime" ng-change="onChanges()" name="hopBoilTime" style="width: 100px;" required />
-		  <span class="help-inline" ng-show="additionForm.hopBoilTime.$error.required">Required</span>
+		  <span class="requiredStar" ng-show="additionForm.hopBoilTime.$error.required">*</span>
 		</div>
 		<div class="span2">
 			<span>IBUs:</span>
-			<input type="text" class="k-textbox" readonly="true" ng-model="hopAdditionIbus" />
+			<input type="text" class="k-textbox" readonly="true" ng-model="hopAdditionIbus" required />
 		</div>
 	</div>
-	<br />
 	<div class="row-fluid">
 		<div class="span6">
 			<input class="k-button" ng-class="{'k-state-disabled': !additionForm.$valid}" ng-disabled="!additionForm.$valid" type="button" value="Add" ng-click="addHop()" />

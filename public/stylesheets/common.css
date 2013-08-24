@@ -1,4 +1,9 @@
 
+span.requiredStar
+{
+	color: red;
+}
+
 div.spacedContent
 {
 	margin-top: 30px;
