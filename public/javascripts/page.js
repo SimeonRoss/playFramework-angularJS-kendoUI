@@ -161,8 +161,6 @@ function AddHopToRecipeFormController( $scope, IbuQueryCalc ) {
     } 
   };
 
-
-
   $scope.updateIBU = function() {
     if ($scope.selectedHop > 0 && $scope.hopQuantity > 0 && $scope.hopBoilTime > 0)
     {
