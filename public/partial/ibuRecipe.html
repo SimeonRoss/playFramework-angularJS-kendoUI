@@ -34,7 +34,8 @@
        		k-columns='[{ "field": "hop.name", "title": "Hop"},
        					{ "field": "hop.alphaAcid", "title": "Alpha Acid"},
        					{ "field": "quantity", "title": "Quantity (g)"},
-       					{ "field": "additionTime", "title": "Boil Time  (min)"}]'
+       					{ "field": "additionTime", "title": "Boil Time  (min)"},
+       					{ "field": "ibu", "title": "IBUs"}]'
         	k-sortable="true", k-groupable="false", k-filterable="false">
  		</div>
 	</div>
@@ -57,7 +58,6 @@
 	        	k-data-source="hops"
 	        	k-value="'null'"
 	        	ng-model="selectedHop"
-	        	k-on-change="onChanges()"
 	        	ng-required="true"
 	        	name="selectedHop">
 	       </select>
@@ -66,12 +66,12 @@
 		</div>
 		<div class="span2">
 		  <span>Quantity (g): </span>
-		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" name="hopQuantity" ng-model="hopQuantity" ng-change="onChanges()" style="width: 100px;" />
+		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" name="hopQuantity" ng-model="hopQuantity" style="width: 100px;" required />
 		  <span class="requiredStar" ng-show="additionForm.hopQuantity.$error.required">*</span>
 		</div>
 		<div class="span2">
 		  <span>Addition Time (mins): </span>
-		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="hopBoilTime" ng-change="onChanges()" name="hopBoilTime" style="width: 100px;" required />
+		  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="hopBoilTime" name="hopBoilTime" style="width: 100px;" required />
 		  <span class="requiredStar" ng-show="additionForm.hopBoilTime.$error.required">*</span>
 		</div>
 		<div class="span2">
@@ -81,7 +81,7 @@
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
-			<input class="k-button" ng-class="{'k-state-disabled': !additionForm.$valid}" ng-disabled="!additionForm.$valid" type="button" value="Add" ng-click="addHop()" />
+			<input class="k-button" ng-class="{'k-state-disabled': !additionForm.$valid}" ng-disabled="!additionForm.$valid" type="button" value="Add" ng-click="addHop(additionForm)" />
 		</div>	
 	</div>
 </form>

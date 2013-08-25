@@ -102,7 +102,6 @@ function IbuController( $scope, IbuQueryCalc ) {
 
           function (data) {
          $scope.ibus = data.ibu;
-          console.log( data.ibu);
       });
   };
 
@@ -130,9 +129,17 @@ function IbuRecipeController( $scope ) {
 function AddHopToRecipeFormController( $scope, IbuQueryCalc ) {
   // $scope.selectedHop = null;
   $scope.hopQuantity = 10;
-  $scope.hopBoilTime = 1;  
+  $scope.hopBoilTime = 60;  
   $scope.hopAdditionIbus = 0;
   $scope.alpaAcid = '';
+
+  $scope.setDefaults = function() {
+    $scope.selectedHop = null;
+    $scope.hopQuantity = 10;
+    $scope.hopBoilTime = 60;  
+    $scope.hopAdditionIbus = 0;
+    $scope.alpaAcid = '';
+  };
 
   $scope.setAlphaAcid = function() {
     var hop = $scope.hops.get($scope.selectedHop);
@@ -144,17 +151,19 @@ function AddHopToRecipeFormController( $scope, IbuQueryCalc ) {
     }
   };
 
-  $scope.addHop = function(additionForm) {
-
+  $scope.addHop = function() {
     var selHop = $scope.hops.get($scope.selectedHop);
     if (selHop != null) {
-      var addition = { quantity: $scope.hopQuantity, additionTime: $scope.hopBoilTime, hop: selHop};
+      var addition = { quantity: $scope.hopQuantity, additionTime: $scope.hopBoilTime, hop: selHop, ibu: $scope.hopAdditionIbus};
       $scope.hopAdditions.add(addition);
+      $scope.setDefaults();
+      $scope.additionForm.$setPristine();
     } 
   };
 
-  $scope.onChanges = function() {
-    console.log('sigh');
+
+
+  $scope.updateIBU = function() {
     if ($scope.selectedHop > 0 && $scope.hopQuantity > 0 && $scope.hopBoilTime > 0)
     {
         IbuQueryCalc.get({openingGravity: $scope.sg,
@@ -166,7 +175,6 @@ function AddHopToRecipeFormController( $scope, IbuQueryCalc ) {
 
           function (data) {
          $scope.hopAdditionIbus = data.ibu;
-          console.log( data.ibu);
       });
     } else
     {
@@ -174,8 +182,9 @@ function AddHopToRecipeFormController( $scope, IbuQueryCalc ) {
     }
   };
 
-  $scope.$watch('selectedHop', function() {
-    $scope.setAlphaAcid(); 
+  $scope.$watch('selectedHop + hopQuantity + hopBoilTime', function() {
+    $scope.setAlphaAcid();
+    $scope.updateIBU();
   });
 
 }
