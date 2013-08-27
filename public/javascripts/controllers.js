@@ -12,13 +12,7 @@ angular.module('BrewingTools.controllers', [])
     };
   }])
 
-  .controller('AboutController', ['$scope', function($scope) {
-
-    $scope.x = 3;
-
-    $scope.doubleIt = function() {
-      $scope.x *= 2;
-    };
+  .controller('AboutController', [function() {
 
   }])
 
@@ -77,7 +71,7 @@ angular.module('BrewingTools.controllers', [])
     $scope.sg = 1.040;  
   }])
 
-  .controller('AddHopToRecipeFormController', ['$scope', 'IbuQueryCalc', function($scope, IbuQueryCalc) {
+  .controller('AddHopToRecipeFormController', ['$scope', 'IbuCalculator', function($scope, IbuCalculator) {
     // $scope.selectedHop = null;
     $scope.hopQuantity = 10;
     $scope.hopBoilTime = 60;  
@@ -115,16 +109,7 @@ angular.module('BrewingTools.controllers', [])
     $scope.updateIBU = function() {
       if ($scope.selectedHop > 0 && $scope.hopQuantity > 0 && $scope.hopBoilTime > 0)
       {
-          IbuQueryCalc.get({openingGravity: $scope.sg,
-                alphaAcidLevel: $scope.hops.get($scope.selectedHop).alphaAcid,
-                hopsAddedTimeInMins: $scope.hopBoilTime,
-                hopsInGms: $scope.hopQuantity,
-                boilVolume: $scope.boilVolume,
-                boilDuration: $scope.boilTime },
-
-            function (data) {
-           $scope.hopAdditionIbus = data.ibu;
-        });
+        $scope.hopAdditionIbus = IbuCalculator.calculate($scope.sg, $scope.hopBoilTime, $scope.hops.get($scope.selectedHop).alphaAcid, $scope.hopQuantity, $scope.boilVolume);        
       } else
       {
         $scope.hopAdditionIbus = 0;
