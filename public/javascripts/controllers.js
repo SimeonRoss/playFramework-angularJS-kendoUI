@@ -12,7 +12,13 @@ angular.module('BrewingTools.controllers', [])
     };
   }])
 
-  .controller('AboutController', [ function() {
+  .controller('AboutController', ['$scope', function($scope) {
+
+    $scope.x = 3;
+
+    $scope.doubleIt = function() {
+      $scope.x *= 2;
+    };
 
   }])
 
