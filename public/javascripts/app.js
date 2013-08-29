@@ -1,4 +1,4 @@
-var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directives', 'BrewingTools.controllers', 'BrewingTools.factories'])
+var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directives', 'BrewingTools.controllers', 'BrewingTools.controllers.recipe', 'BrewingTools.factories'])
 						.config(['$routeProvider', function($routeProvider) {
 							$routeProvider.
 								when('/abv', {
@@ -16,6 +16,10 @@ var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directiv
 							    when('/', {
 							      controller: 'AboutController',
 							      templateUrl: '/assets/partial/about.html'
+							    }).
+							    when('/recipe', {
+							      controller: 'RecipeController',
+							      templateUrl: '/assets/partial/recipe.html'
 							    }).
 							    otherwise({
 							      redirectTo: '/'

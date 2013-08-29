@@ -1,9 +1,11 @@
 angular.module('BrewingTools.controllers', [])
+
   .controller('MenuController', ['$scope', '$location', function($scope, $location) {
     $scope.menuItems = [{url: '/', name: 'About'},
                         {url: '/abv',       name: 'ABV Calculator'},
                         {url: '/ibu',       name: 'Hop Addition IBU Calculator'},
-                        {url: '/ibuRecipe', name: 'Recipe IBU Calculator'}];
+                        {url: '/ibuRecipe', name: 'Recipe IBU Calculator'},
+                        {url: '/recipe', name: 'Recipe Builder'}];
 
 
     $scope.isActive = function(url)

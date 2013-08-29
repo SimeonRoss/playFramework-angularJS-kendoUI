@@ -1,0 +1,59 @@
+<h3>Recipe Builder</h3>
+
+<div class="row-fluid">
+	<div class="span6">
+		<strong>Recipe Properties</strong>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span2">
+	  <span>BJCP Style: </span>
+	  <select kendo-drop-down-list
+	        	k-option-label="'Select a Style'"
+	        	k-data-text-field="'SubCategory'"
+	        	k-data-value-field="'Code'"
+	        	k-data-source="styles"
+	        	k-value="'null'"
+	        	ng-model="selectedStyle"
+	        	ng-required="false">
+	       </select>
+	</div>
+	<div class="span2">
+	  <span>Brew Name: </span>
+	  <input type="text" class="k-textbox" ng-model="brewName" />
+	</div>
+	<div class="span2">
+	  <span>Original Gravity (OG): </span>
+	  <input type="text" class="k-textbox" readonly="true" ng-model="og" />
+	</div>
+	<div class="span2">
+	  <span>Final Gravity (OG): </span>
+	  <input type="text" class="k-textbox" readonly="true" ng-model="fg" />
+	</div>
+	<div class="span2">
+	  <span>ABV: </span>
+	  <input type="text" class="k-textbox" readonly="true" ng-model="abv" />
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span2">
+	  <span>Efficiency:</span>
+	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="efficiency" style="width: 100px;" />
+	</div>
+	<div class="span2">
+	  <span>Mash Time (mins):</span>
+	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="mashTime" style="width: 100px;" />
+	</div>
+	<div class="span2">
+	  <span>Boil Time (mins): </span>	  
+	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="boilTime" style="width: 100px;" />
+	</div>
+    <div class="span2">
+        <span>Boil Volume (L): </span>
+        <input kendo-numeric-text-box k-min="1" k-format="'#.0'" k-step="0.1" ng-model="boilVolume" style="width: 100px;" />
+    </div>
+    <div class="span2">
+	  <span>IBUs: </span>
+	  <input type="text" class="k-textbox" readonly="true" ng-model="ibus" />
+	</div>
+</div>
