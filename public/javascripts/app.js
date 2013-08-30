@@ -1,4 +1,17 @@
 var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directives', 'BrewingTools.controllers', 'BrewingTools.controllers.recipe', 'BrewingTools.factories'])
+						.run(function($rootScope) {
+							$rootScope.dataHops = new kendo.data.DataSource({
+						      transport: {
+						        read: "/assets/data/hops.json"
+						      },
+						      schema: {
+						        model: { id: "id" }
+						      }
+						    });
+						    $rootScope.roundNumber = function(number, places) {
+						    	return (Math.round(number * 100) / 100).toFixed(places);
+						    }
+						})
 						.config(['$routeProvider', function($routeProvider) {
 							$routeProvider.
 								when('/abv', {

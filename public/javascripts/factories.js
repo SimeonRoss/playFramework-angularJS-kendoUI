@@ -29,14 +29,14 @@ angular.module('BrewingTools.factories', ['ngResource'])
     var ibuCalculator = {};
 
     ibuCalculator.calculate = function(sg, additionTime, aaRating, qty, volume) {
-      var bigFactor = getBigFactor( sg );
-      var boilTimeFactor = getBoilTimeFactor( additionTime );
+      var bigFactor = this.getBigFactor( sg );
+      var boilTimeFactor = this.getBoilTimeFactor( additionTime );
       var decimalAAUtil = bigFactor * boilTimeFactor;
-      var mgPerL = getAlphaAcidConcentration( aaRating / 100, qty, volume );
+      var mgPerL = this.getAlphaAcidConcentration( aaRating / 100, qty, volume );
 
       var ibu = decimalAAUtil * mgPerL;
 
-      return round( ibu ).toDecimalPlaces( 2 );
+      return (Math.round(ibu * 100) / 100).toFixed(2);
     };
 
     ibuCalculator.getAlphaAcidConcentration = function( aaRating, grams, volume )
