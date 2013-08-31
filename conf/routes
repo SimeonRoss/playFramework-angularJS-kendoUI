@@ -8,3 +8,8 @@ GET      /rest/ibu/calc         controllers.IbuController.calcIndividualIbu(addi
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# Recipes
+GET     /rest/recipes                controllers.RecipeController.recipes()
+POST    /rest/recipes                controllers.RecipeController.newRecipe()
+POST    /rest/recipes/:id/delete     controllers.RecipeController.deleteRecipe(id: Long)

@@ -25,6 +25,12 @@ angular.module('BrewingTools.factories', ['ngResource'])
     return $resource('/rest/ibu/calc');
   }])
 
+  .factory('RecipeService', ['$resource', function($resource) {
+    return $resource('/rest/recipes', {}, {
+      post: {method:'POST'}
+    });
+  }])
+
   .factory('IbuCalculator', [ function() {
     var ibuCalculator = {};
 

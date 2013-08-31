@@ -43,10 +43,10 @@ angular.module('BrewingTools.controllers.recipe', [])
 
     $scope.$watch('og + fg + efficiency', function() {
       $scope.abv = AbvCalculator.calculate($scope.og, $scope.fg, false);
-    });    
+    });
   }])
 
-  .controller('RecipeHopAdditionCtrl', ['$scope', 'IbuCalculator', function($scope, IbuCalculator) {
+  .controller('RecipeHopAdditionCtrl', ['$scope', 'IbuCalculator', 'RecipeService', function($scope, IbuCalculator, RecipeService) {
     $scope.formActive = false;
     // $scope.selectedHop = null;
     $scope.hopQuantity = 10;
@@ -72,6 +72,7 @@ angular.module('BrewingTools.controllers.recipe', [])
     };
 
     $scope.addHop = function() {
+      RecipeService.post({'name': 'fred'});
       var selHop = $scope.dataHops.get($scope.selectedHop);
       if (selHop != null) {
         var addition = { quantity: $scope.hopQuantity, additionTime: $scope.hopBoilTime, hop: selHop, ibu: $scope.hopAdditionIbus};
