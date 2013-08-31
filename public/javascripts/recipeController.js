@@ -14,7 +14,14 @@ angular.module('BrewingTools.controllers.recipe', [])
       }
     });
     $scope.hopAdditions = new kendo.data.DataSource({
-      data: [ ]
+      data: [ ],
+      aggregate: [
+        {field: 'quantity', aggregate: 'sum'},
+        {field: 'ibu', aggregate: 'sum'}],
+      sort: {
+        field: 'additionTime',
+        dir: 'desc'
+      }
     });
 
     $scope.brewName = '';

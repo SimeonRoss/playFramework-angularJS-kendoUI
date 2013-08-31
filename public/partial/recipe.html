@@ -71,12 +71,12 @@
 <div class="row-fluid">
 	<div class="span10">
 		<div kendo-grid k-data-source="hopAdditions" 
-       		k-pageable='{ "refresh": false, "pageSizes": false }'
-       		k-columns='[{ "field": "hop.name", "title": "Hop"},
-       					{ "field": "hop.alphaAcid", "title": "Alpha Acid"},
-       					{ "field": "quantity", "title": "Quantity (g)"},
-       					{ "field": "additionTime", "title": "Boil Time  (min)"},
-       					{ "field": "ibu", "title": "IBUs"}]'
+       		k-pageable="{ 'refresh': false, 'pageSizes': false }"
+       		k-columns="[{ 'field': 'hop.name', 'title': 'Hop'},
+       					{ 'field': 'hop.alphaAcid', 'title': 'Alpha Acid'},
+       					{ 'field': 'quantity', 'title': 'Quantity (g)', 'footerTemplate': 'Total: #= kendo.toString(sum, 0.00) #'},
+       					{ 'field': 'additionTime', 'title': 'Boil Time  (min)'},
+       					{ 'field': 'ibu', 'title': 'IBUs', 'footerTemplate': 'Total: #= kendo.toString(sum, 0.00) #'}]"
         	k-sortable="true", k-groupable="false", k-filterable="false">
  		</div>
 	</div>
@@ -125,8 +125,8 @@
 		<div class="span10">
 			<input class="k-button" ng-class="{'k-state-disabled': !hopAdditionForm.$valid}" ng-disabled="!hopAdditionForm.$valid" type="button" value="Add" ng-click="addHop()" />
 			<input class="k-button" type="Button" value="Done" ng-click="done()" />
-		</form>
+		</div>
 	</div>
-	</div>
-
+	</form>
+</div>
 <br />

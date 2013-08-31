@@ -36,7 +36,7 @@ angular.module('BrewingTools.factories', ['ngResource'])
 
       var ibu = decimalAAUtil * mgPerL;
 
-      return (Math.round(ibu * 100) / 100).toFixed(2);
+      return +(Math.round(ibu * 100) / 100).toFixed(2);
     };
 
     ibuCalculator.getAlphaAcidConcentration = function( aaRating, grams, volume )
