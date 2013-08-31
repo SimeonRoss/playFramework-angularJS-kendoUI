@@ -29,7 +29,7 @@ angular.module('BrewingTools.factories', ['ngResource'])
     var ibuCalculator = {};
 
     ibuCalculator.calculate = function(sg, additionTime, aaRating, qty, volume) {
-      var bigFactor = this.getBigFactor( sg );
+      var bigFactor = this. getBigFactor( sg );
       var boilTimeFactor = this.getBoilTimeFactor( additionTime );
       var decimalAAUtil = bigFactor * boilTimeFactor;
       var mgPerL = this.getAlphaAcidConcentration( aaRating / 100, qty, volume );
