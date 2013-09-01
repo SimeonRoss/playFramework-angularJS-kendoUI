@@ -1,6 +1,6 @@
 angular.module('BrewingTools.controllers.recipe', [])
 
-  .controller('RecipeController', ['$scope', 'AbvCalculator', function($scope, AbvCalculator) {
+  .controller('RecipeController', ['$scope', 'AbvCalculator', 'RecipeService', function($scope, AbvCalculator, RecipeService) {
     $scope.styles = new kendo.data.DataSource({
       transport: {
         read: "/assets/data/styles.json"
@@ -24,29 +24,38 @@ angular.module('BrewingTools.controllers.recipe', [])
       }
     });
 
-    $scope.brewName = '';
-    $scope.boilVolume = 23.0;
-    $scope.boilLength = 60;
-    $scope.mashLength = 60;
-    $scope.og = '1.040';
-    $scope.fg = '1.010';
-    $scope.ibus = 0; 
-    $scope.efficiency = 70;
+    $scope.recipe = {};
+    $scope.recipe.brewName = '';
+    $scope.recipe.boilVolume = 23.0;
+    $scope.recipe.boilLength = 60;
+    $scope.recipe.mashLength = 60;
+    $scope.recipe.og = '1.040';
+    $scope.recipe.fg = '1.010';
+    $scope.recipe.ibus = 0; 
+    $scope.recipe.efficiency = 70;
 
     $scope.$watch('hopAdditions', function() {
-      $scope.ibus = 0; 
+      $scope.recipe.ibus = 0; 
       angular.forEach($scope.hopAdditions.data(), function(value, key) {
-        $scope.ibus += +value.ibu;        
+        $scope.recipe.ibus += +value.ibu;        
       });
-      $scope.ibus = $scope.roundNumber($scope.ibus, 2);
+      $scope.recipe.ibus = $scope.roundNumber($scope.recipe.ibus, 2);
     }, true);
 
-    $scope.$watch('og + fg + efficiency', function() {
-      $scope.abv = AbvCalculator.calculate($scope.og, $scope.fg, false);
+    $scope.$watch('recipe.og + recipe.fg + recipe.efficiency', function() {
+      $scope.recipe.abv = AbvCalculator.calculate($scope.recipe.og, $scope.recipe.fg, false);
     });
+
+    $scope.saveRecipe = function()
+    {
+      $scope.recipe.hops = $scope.hopAdditions.data();
+      RecipeService.post($scope.recipe, function (data) {
+        console.log(data);
+      });
+    };
   }])
 
-  .controller('RecipeHopAdditionCtrl', ['$scope', 'IbuCalculator', 'RecipeService', function($scope, IbuCalculator, RecipeService) {
+  .controller('RecipeHopAdditionCtrl', ['$scope', 'IbuCalculator', function($scope, IbuCalculator) {
     $scope.formActive = false;
     // $scope.selectedHop = null;
     $scope.hopQuantity = 10;
@@ -55,6 +64,7 @@ angular.module('BrewingTools.controllers.recipe', [])
 
     $scope.showForm = function() {
       $scope.formActive = true;
+      console.log($scope.recipe);
     };
 
     $scope.done = function() {
@@ -64,7 +74,7 @@ angular.module('BrewingTools.controllers.recipe', [])
     $scope.updateIBU = function() {
       if ($scope.selectedHop > 0 && $scope.hopQuantity > 0 && $scope.hopBoilTime > 0)
       {
-        $scope.hopAdditionIbus = IbuCalculator.calculate($scope.og, $scope.hopBoilTime, $scope.dataHops.get($scope.selectedHop).alphaAcid, $scope.hopQuantity, $scope.boilVolume);
+        $scope.hopAdditionIbus = IbuCalculator.calculate($scope.recipe.og, $scope.hopBoilTime, $scope.dataHops.get($scope.selectedHop).alphaAcid, $scope.hopQuantity, $scope.recipe.boilVolume);
       } else
       {
         $scope.hopAdditionIbus = 0;
@@ -72,7 +82,6 @@ angular.module('BrewingTools.controllers.recipe', [])
     };
 
     $scope.addHop = function() {
-      RecipeService.post({'name': 'fred'});
       var selHop = $scope.dataHops.get($scope.selectedHop);
       if (selHop != null) {
         var addition = { quantity: $scope.hopQuantity, additionTime: $scope.hopBoilTime, hop: selHop, ibu: $scope.hopAdditionIbus};

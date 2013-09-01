@@ -13,7 +13,8 @@ object ApplicationBuild extends Build {
     javaJdbc,
     javaEbean,
     "org.springframework" % "spring-beans" % "1.2.6",
-    "com.google.inject" % "guice" % "3.0"
+    "com.google.inject" % "guice" % "3.0",
+    "com.googlecode.lambdaj" % "lambdaj" % "2.3.3"
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(

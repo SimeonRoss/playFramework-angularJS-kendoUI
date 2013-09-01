@@ -16,47 +16,47 @@
 	        	k-data-value-field="'Code'"
 	        	k-data-source="styles"
 	        	k-value="'null'"
-	        	ng-model="selectedStyle"
+	        	ng-model="recipe.selectedStyle"
 	        	ng-required="false">
 	       </select>
 	</div>	
 	<div class="span2">
 	  <span>Efficiency:</span>
-	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="efficiency" />
+	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="recipe.efficiency" />
 	</div>
 	<div class="span2">
         <span>Boil Volume (L): </span>
-        <input kendo-numeric-text-box k-min="1" k-format="'#.0'" k-step="0.1" ng-model="boilVolume" />
+        <input kendo-numeric-text-box k-min="1" k-format="'#.0'" k-step="0.1" ng-model="recipe.boilVolume" />
     </div>
 	<div class="span2">
 	  <span>Original Gravity (OG): </span>
-	  <input type="text" class="k-textbox" readonly="true" ng-model="og" />
+	  <input type="text" class="k-textbox" readonly="true" ng-model="recipe.og" />
 	</div>	
 	<div class="span2">
 	  <span style="display: block;">ABV: </span>
-	  <input type="text" class="k-textbox" readonly="true" ng-model="abv" />
+	  <input type="text" class="k-textbox" readonly="true" ng-model="recipe.abv" />
 	</div>
 </div>
 <div class="row-fluid recipeProperties">
 	<div class="span2">
 	  <span>Brew Name: </span>
-	  <input type="text" class="k-textbox inputBox" ng-model="brewName" />
+	  <input type="text" class="k-textbox inputBox" ng-model="recipe.brewName" />
 	</div>	
 	<div class="span2">
 	  <span>Mash Time (mins):</span>
-	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="mashLength" />
+	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="recipe.mashLength" />
 	</div>
 	<div class="span2">
 	  <span>Boil Time (mins): </span>	  
-	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="boilLength" />
+	  <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-step="1" ng-model="recipe.boilLength" />
 	</div>
     <div class="span2">
 	  <span>Final Gravity (FG): </span>
-	  <input type="text" class="k-textbox" readonly="true" ng-model="fg" />
+	  <input type="text" class="k-textbox" readonly="true" ng-model="recipe.fg" />
 	</div>
     <div class="span2">
 	  <span style="display: block;">IBUs: </span>
-	  <input type="text" class="k-textbox" readonly="true" ng-model="ibus" />
+	  <input type="text" class="k-textbox" readonly="true" ng-model="recipe.ibus" />
 	</div>
 </div>
 
@@ -129,4 +129,7 @@
 	</div>
 	</form>
 </div>
+<br /><br />
+<input class="k-button" type="Button" value="Save" ng-click="saveRecipe()" />
+
 <br />
