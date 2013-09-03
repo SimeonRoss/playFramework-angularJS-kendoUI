@@ -1,0 +1,19 @@
+<h3>Recipes</h3>
+
+<div class="row-fluid">
+	<div class="span10">
+		<div id="grid"></div>
+		<kendolist source="people" groupable="true" sortable="true" columns="[ {
+                                field: 'name',
+                                width: 90,
+                                title: 'First Name'
+                            } , {
+                                field: 'age',
+                                width: 90,
+                                title: 'Last Name'
+                            } 
+                        ]" pageable="true">
+		</kendolist>
+	</div>
+</div>
+

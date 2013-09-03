@@ -5,7 +5,7 @@ angular.module('BrewingTools.controllers', [])
                         {url: '/abv',       name: 'ABV Calculator'},
                         {url: '/ibu',       name: 'Hop Addition IBU Calculator'},
                         {url: '/ibuRecipe', name: 'Recipe IBU Calculator'},
-                        {url: '/recipe', name: 'Recipe Builder'}];
+                        {url: '/recipes',   name: 'Recipes'}];
 
 
     $scope.isActive = function(url)

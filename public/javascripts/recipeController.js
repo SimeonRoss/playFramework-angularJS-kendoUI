@@ -1,5 +1,9 @@
 angular.module('BrewingTools.controllers.recipe', [])
 
+  .controller('RecipeListCtrl', ['$scope', function ($scope) {
+    $scope.people = [{'name': 'fred', 'age': 'five'}];
+  }])
+
   .controller('RecipeController', ['$scope', 'AbvCalculator', 'RecipeService', function($scope, AbvCalculator, RecipeService) {
     $scope.styles = new kendo.data.DataSource({
       transport: {
