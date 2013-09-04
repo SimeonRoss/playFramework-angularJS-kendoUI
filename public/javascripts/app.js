@@ -10,6 +10,10 @@ var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directiv
 	    });
 	    $rootScope.roundNumber = function(number, places) {
 	    	return (Math.round(number * 100) / 100).toFixed(places);
+	    };
+	    $rootScope.getAsHtmlLink = function(text, link)
+	    {
+	    	return '<a href="' + link + '">' + text + '</a>';
 	    }
 	})
 	.config(['$routeProvider', function($routeProvider) {
@@ -34,7 +38,7 @@ var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directiv
 		      controller: 'RecipeListCtrl',
 		      templateUrl: '/assets/partial/recipeList.html'
 		    }).
-		    when('/recipes/create', {
+		    when('/recipes/:recipeId', {
 		      controller: 'RecipeController',
 		      templateUrl: '/assets/partial/recipe.html'
 		    }).
@@ -44,25 +48,19 @@ var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directiv
 
   }]);
 
-brewingTools.directive('kendolist', function() {		
-	    return {
-	        restrict: 'E',
-	        replace: true,
-	        scope:{source:'=source',columns:'=columns'},
-	        template: '<div id="kendolist"></div>',
-	        link: function(scope,element,attrs)
-	        {
-	            element.kendoGrid({
-	                        dataSource: scope.source,
-	                        groupable: attrs.groupable,
-	                        sortable: attrs.sortable,
-	                        pageable: {
-	                            refresh: true,
-	                            pageSizes: true
-	                        },
-	                        columns: scope.columns
-	                    });
-        	}
-        }
-    });
+// brewingTools.directive('kendolist', function() {		
+// 	    return {
+// 	        restrict: 'E',
+// 	        replace: true,
+// 	        scope:{source:'=source', temp: '=temp'},
+// 	        template: '<div></div>',
+// 	        link: function(scope,element,attrs)
+// 	        {
+// 	            element.kendoListView({
+// 	                        dataSource: scope.source,
+// 	                        template: kendo.template($(scope.temp).html())
+// 	                    });
+//         	}
+//         }
+//     });
 

@@ -1,10 +1,35 @@
 angular.module('BrewingTools.controllers.recipe', [])
 
-  .controller('RecipeListCtrl', ['$scope', function ($scope) {
-    $scope.people = [{'name': 'fred', 'age': 'five'}];
+  .controller('RecipeListCtrl', ['$scope','$location', function ($scope, $location) {
+    // $scope.recipes = new kendo.data.DataSource({
+    //   data: [ {'brewName': 'rage', 'style': 'ale'}, {'brewName': 'rage2', 'style': 'ale'}, {'brewName': 'rage3', 'style': 'pale'}, {'brewName': 'rage4', 'style': 'pale'} ]
+    // });
+    // $scope.recipes = [ {'brewName': 'rage', 'style': 'ale'}, {'brewName': 'rage2', 'style': 'ale'}, {'brewName': 'rage3', 'style': 'pale'}, {'brewName': 'rage4', 'style': 'pale'}];
+    $scope.recipes = new kendo.data.DataSource({
+        transport: {
+          read: "/rest/recipes"
+        }
+      });
+
+    $scope.createNewRecipe = function() {
+      $location.path($location.path() + '/new');
+    };
+
+    $scope.onSelection = function(e) {
+      // e.preventDefault();
+      console.log(e);
+      console.log(e.sender._data[0].id);
+
+      // var tr = $(e.target).closest("tr"); // get the current table row (tr)
+      //     // get the data bound to the current table row
+      //     var data = this.dataItem(tr);
+      //     console.log("Details for: " + data.name);
+      //     console.log(tr);
+
+    };
   }])
 
-  .controller('RecipeController', ['$scope', 'AbvCalculator', 'RecipeService', function($scope, AbvCalculator, RecipeService) {
+  .controller('RecipeController', ['$scope', '$routeParams', 'AbvCalculator', 'RecipeService', function($scope, $routeParams, AbvCalculator, RecipeService) {
     $scope.styles = new kendo.data.DataSource({
       transport: {
         read: "/assets/data/styles.json"

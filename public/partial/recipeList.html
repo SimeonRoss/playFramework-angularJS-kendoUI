@@ -2,18 +2,15 @@
 
 <div class="row-fluid">
 	<div class="span10">
-		<div id="grid"></div>
-		<kendolist source="people" groupable="true" sortable="true" columns="[ {
-                                field: 'name',
-                                width: 90,
-                                title: 'First Name'
-                            } , {
-                                field: 'age',
-                                width: 90,
-                                title: 'Last Name'
-                            } 
-                        ]" pageable="true">
-		</kendolist>
+        <div kendo-grid k-data-source="recipes" k-selectable="true" k-sortable="true" k-pageable="{'refresh': true, 'pageSizes': true}"
+                k-columns='[{field: "brewName", title: "Name", filterable: false, sortable: true},
+                {field: "style", title: "Style", filterable: true, sortable: true}]' k-on-change="onSelection(kendoEvent)">
+        </div>
 	</div>
 </div>
-
+<br />
+<div class="row-fluid">
+    <div class="span10">
+        <input class="k-button" type="Button" value="Create New Recipe" ng-click="createNewRecipe()" />
+    </div>
+</div>

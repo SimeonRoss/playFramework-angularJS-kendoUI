@@ -1,0 +1,2 @@
+Ideas
+- Boil volume vs Target Volume vs Wastage Volume
