@@ -4,7 +4,7 @@
 	<div class="span10">
         <div kendo-grid k-data-source="recipes" k-selectable="true" k-sortable="true" k-pageable="{'refresh': true, 'pageSizes': true}"
                 k-columns='[{field: "brewName", title: "Name", filterable: false, sortable: true},
-                {field: "style", title: "Style", filterable: true, sortable: true}]' k-on-change="onSelection(kendoEvent)">
+                {field: getThis("style"), title: "Style", filterable: true, sortable: true}]' k-on-change="onSelection(kendoEvent)">
         </div>
 	</div>
 </div>

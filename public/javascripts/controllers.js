@@ -14,7 +14,7 @@ angular.module('BrewingTools.controllers', [])
     };
   }])
 
-  .controller('AboutController', [function() {
+  .controller('AboutController', ['$scope', function($scope) {       
 
   }])
 

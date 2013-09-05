@@ -18,9 +18,13 @@ angular.module('BrewingTools.controllers.recipe', [])
     $scope.onSelection = function(e) {
       $location.path($location.path() + '/' + e.sender._data[0].id);
     };
+
+    $scope.getThis = function (f) {
+      return 'mary';
+    }
   }])
 
-  .controller('RecipeController', ['$scope', '$routeParams', 'AbvCalculator', 'RecipeService', function($scope, $routeParams, AbvCalculator, RecipeService) {
+  .controller('RecipeController', ['$scope', '$routeParams', 'AbvCalculator', 'RecipeService', 'Hops', function($scope, $routeParams, AbvCalculator, RecipeService, Hops) {
     $scope.styles = new kendo.data.DataSource({
       transport: {
         read: "/assets/data/styles.json"
@@ -32,7 +36,7 @@ angular.module('BrewingTools.controllers.recipe', [])
         field: "SubCategory",
         dir: "asc"
       }
-    });
+    });    
     $scope.hopAdditions = new kendo.data.DataSource({
       data: [ ],
       aggregate: [
@@ -44,8 +48,10 @@ angular.module('BrewingTools.controllers.recipe', [])
       }
     });
 
+    $scope.saving = false;
     $scope.recipe = {};
     if ($routeParams.recipeId == 'new') {
+      $scope.saveAction = 'Create';
       $scope.recipe = {};
       $scope.recipe.brewName = '';
       $scope.recipe.boilVolume = 23.0;
@@ -57,10 +63,12 @@ angular.module('BrewingTools.controllers.recipe', [])
       $scope.recipe.efficiency = 70;  
     } else 
     {
+      $scope.saveAction = 'Update';
       RecipeService.get({id: $routeParams.recipeId}, function (data) {
         $scope.recipe = data;
-        console.log(data);
+        console.log(data.hops);
         console.log($scope.recipe);
+        $scope.hopAdditions.data(data.hops);
 
       });
     }
@@ -80,8 +88,10 @@ angular.module('BrewingTools.controllers.recipe', [])
     $scope.saveRecipe = function()
     {
       $scope.recipe.hops = $scope.hopAdditions.data();
+      $scope.saveAction = 'Saving...';
+      $scope.saving = true;
       RecipeService.post($scope.recipe, function (data) {
-        console.log(data);
+        $scope.navigate('/recipes');
       });
     };
   }])

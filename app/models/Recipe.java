@@ -1,14 +1,14 @@
 package models;
 
-import java.util.List;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import play.db.ebean.Model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import play.db.ebean.Model;
-import controllers.ClientRecipe;
+import java.util.List;
 
 @SuppressWarnings("serial")
 @Entity
@@ -16,15 +16,16 @@ public class Recipe extends Model
 {
 	@Id
 	private Long id;
-	private String brewName;
-	private double boilVolume;
 	private int boilLength;
 	private int mashLength;
-	private String og;
-	private String fg;
-	private double ibus;
 	private int efficiency;
 	private double abv;
+	private double boilVolume;
+	private double ibus;
+	private String og;
+	private String fg;
+    private String style;
+	private String brewName;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<HopAddition> hopAdditions;
@@ -44,22 +45,6 @@ public class Recipe extends Model
 	public static void delete(Long id)
 	{
 		find.ref(id).delete();
-	}
-
-	public static Recipe fromClientData(ClientRecipe clientRecipe)
-	{
-		Recipe recipe = new Recipe();
-		recipe.setAbv(clientRecipe.getAbv());
-		recipe.setBoilLength(clientRecipe.getBoilLength());
-		recipe.setBoilVolume(clientRecipe.getBoilVolume());
-		recipe.setBrewName(clientRecipe.getBrewName());
-		recipe.setEfficiency(clientRecipe.getEfficiency());
-		recipe.setFg(clientRecipe.getFg());
-		recipe.setIbus(clientRecipe.getIbus());
-		recipe.setMashLength(clientRecipe.getMashLength());
-		recipe.setOg(clientRecipe.getOg());
-
-		return recipe;
 	}
 
 	protected Recipe()
@@ -171,9 +156,18 @@ public class Recipe extends Model
 		return hopAdditions;
 	}
 
+    @JsonProperty("hops")
+    @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 	public void setHopAdditions(List<HopAddition> hopAdditions)
 	{
 		this.hopAdditions = hopAdditions;
 	}
 
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
 }

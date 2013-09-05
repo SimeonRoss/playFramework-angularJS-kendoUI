@@ -32,6 +32,10 @@ angular.module('BrewingTools.factories', ['ngResource'])
     });
   }])
 
+  .factory('Hops', ['$resource', function($resource) {
+    return $resource('/rest/hops/:id', {});
+  }])
+
   .factory('IbuCalculator', [ function() {
     var ibuCalculator = {};
 

@@ -1,10 +1,9 @@
 package models;
 
+import play.db.ebean.Model;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-import play.db.ebean.Model;
-import controllers.ClientHopAddition;
 
 @SuppressWarnings("serial")
 @Entity
@@ -15,18 +14,7 @@ public class HopAddition extends Model
 	private int quantity;
 	private int additionTime;
 	private double ibu;
-	private int hopId;
-
-	public static HopAddition fromClientData(ClientHopAddition clientHopAddition)
-	{
-		HopAddition addition = new HopAddition();
-		addition.setAdditionTime(clientHopAddition.getAdditionTime());
-		addition.setHopId(clientHopAddition.getHop().getId());
-		addition.setIbu(clientHopAddition.getIbu());
-		addition.setQuantity(clientHopAddition.getQuantity());
-
-		return addition;
-	}
+    private Hop hop;
 
 	protected HopAddition()
 	{
@@ -72,14 +60,14 @@ public class HopAddition extends Model
 		this.ibu = ibu;
 	}
 
-	public int getHopId()
+	public Hop getHop()
 	{
-		return hopId;
+		return hop;
 	}
 
-	public void setHopId(int hopId)
+	public void setHop(Hop hop)
 	{
-		this.hopId = hopId;
+		this.hop = hop;
 	}
 
 }

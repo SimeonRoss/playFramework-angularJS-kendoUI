@@ -1,2 +1,6 @@
-Ideas
+Domain Ideas
 - Boil volume vs Target Volume vs Wastage Volume
+
+Code Structure
+- use ngBoilerPlate
+ - native angular bootstrap

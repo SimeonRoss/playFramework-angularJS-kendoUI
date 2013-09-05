@@ -16,7 +16,7 @@
 	        	k-data-value-field="'Code'"
 	        	k-data-source="styles"
 	        	k-value="'null'"
-	        	ng-model="recipe.selectedStyle"
+	        	ng-model="recipe.style"
 	        	ng-required="false">
 	       </select>
 	</div>	
@@ -130,7 +130,7 @@
 	</form>
 </div>
 <br /><br />
-<input class="k-button" type="Button" value="{{ recipe.id == null ? 'Create' : 'Update'}}" ng-click="saveRecipe()" />
+<input class="k-button" type="Button" value="{{ saveAction }}" ng-click="saveRecipe()" ng-disabled="saving" />
 <input class="k-button" type="Button" value="Cancel" ng-click="navigate('/recipes')" />
 
 <br />
