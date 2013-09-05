@@ -1,5 +1,5 @@
 var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directives', 'BrewingTools.controllers', 'BrewingTools.controllers.recipe', 'BrewingTools.factories'])
-	.run(function($rootScope) {
+	.run(function($rootScope, $location) {
 		$rootScope.dataHops = new kendo.data.DataSource({
 	      transport: {
 	        read: "/assets/data/hops.json"
@@ -14,6 +14,9 @@ var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directiv
 	    $rootScope.getAsHtmlLink = function(text, link)
 	    {
 	    	return '<a href="' + link + '">' + text + '</a>';
+	    };
+	    $rootScope.navigate = function(url) {
+	    	$location.path(url);
 	    }
 	})
 	.config(['$routeProvider', function($routeProvider) {

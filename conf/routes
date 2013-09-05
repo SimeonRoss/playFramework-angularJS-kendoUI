@@ -11,5 +11,6 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Recipes
 GET     /rest/recipes                controllers.RecipeController.recipes()
+GET     /rest/recipes/:id            controllers.RecipeController.recipe(id: Long)
 POST    /rest/recipes                controllers.RecipeController.newRecipe()
 POST    /rest/recipes/:id/delete     controllers.RecipeController.deleteRecipe(id: Long)

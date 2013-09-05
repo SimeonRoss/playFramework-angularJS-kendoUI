@@ -1,27 +1,49 @@
 package controllers;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import models.HopAddition;
 import models.Recipe;
+
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
+
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class RecipeController extends Controller
 {
 	public static ObjectMapper mapper = new ObjectMapper();
 
-    @BodyParser.Of(BodyParser.Json.class)
+	@BodyParser.Of(BodyParser.Json.class)
 	public static Result recipes()
 	{
-        JsonNode node = mapper.valueToTree(Recipe.all());
+		JsonNode node = mapper.valueToTree(Recipe.all());
+
+		return ok(node);
+	}
+
+	@BodyParser.Of(BodyParser.Json.class)
+	public static Result recipe(Long id)
+	{
+		// JsonNode json = request().body().asJson();
+		// if (json == null)
+		// {
+		// return badRequest("Expecting Json data");
+		// }
+		// Recipe recipe = Recipe.find.byId(json.get("id").asLong());
+		Recipe recipe = Recipe.find.byId(id);
+		if (recipe == null)
+		{
+			return notFound();
+		}
+
+		JsonNode node = mapper.valueToTree(recipe);
 
 		return ok(node);
 	}

@@ -16,16 +16,7 @@ angular.module('BrewingTools.controllers.recipe', [])
     };
 
     $scope.onSelection = function(e) {
-      // e.preventDefault();
-      console.log(e);
-      console.log(e.sender._data[0].id);
-
-      // var tr = $(e.target).closest("tr"); // get the current table row (tr)
-      //     // get the data bound to the current table row
-      //     var data = this.dataItem(tr);
-      //     console.log("Details for: " + data.name);
-      //     console.log(tr);
-
+      $location.path($location.path() + '/' + e.sender._data[0].id);
     };
   }])
 
@@ -54,15 +45,26 @@ angular.module('BrewingTools.controllers.recipe', [])
     });
 
     $scope.recipe = {};
-    $scope.recipe.brewName = '';
-    $scope.recipe.boilVolume = 23.0;
-    $scope.recipe.boilLength = 60;
-    $scope.recipe.mashLength = 60;
-    $scope.recipe.og = '1.040';
-    $scope.recipe.fg = '1.010';
-    $scope.recipe.ibus = 0; 
-    $scope.recipe.efficiency = 70;
+    if ($routeParams.recipeId == 'new') {
+      $scope.recipe = {};
+      $scope.recipe.brewName = '';
+      $scope.recipe.boilVolume = 23.0;
+      $scope.recipe.boilLength = 60;
+      $scope.recipe.mashLength = 60;
+      $scope.recipe.og = '1.040';
+      $scope.recipe.fg = '1.010';
+      $scope.recipe.ibus = 0; 
+      $scope.recipe.efficiency = 70;  
+    } else 
+    {
+      RecipeService.get({id: $routeParams.recipeId}, function (data) {
+        $scope.recipe = data;
+        console.log(data);
+        console.log($scope.recipe);
 
+      });
+    }
+    
     $scope.$watch('hopAdditions', function() {
       $scope.recipe.ibus = 0; 
       angular.forEach($scope.hopAdditions.data(), function(value, key) {

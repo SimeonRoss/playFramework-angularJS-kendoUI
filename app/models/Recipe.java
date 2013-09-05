@@ -29,7 +29,7 @@ public class Recipe extends Model
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<HopAddition> hopAdditions;
 
-	private static Finder<Long, Recipe> find = new Finder<Long, Recipe>(Long.class, Recipe.class);
+	public static Finder<Long, Recipe> find = new Finder<Long, Recipe>(Long.class, Recipe.class);
 
 	public static List<Recipe> all()
 	{

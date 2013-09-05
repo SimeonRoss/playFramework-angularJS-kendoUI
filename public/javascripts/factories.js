@@ -26,8 +26,9 @@ angular.module('BrewingTools.factories', ['ngResource'])
   }])
 
   .factory('RecipeService', ['$resource', function($resource) {
-    return $resource('/rest/recipes', {}, {
-      post: {method:'POST'}
+    return $resource('/rest/recipes/:id', {}, {
+      post: {method:'POST'},
+      get: {method: 'GET'}
     });
   }])
 
