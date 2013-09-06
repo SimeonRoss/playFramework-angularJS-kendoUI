@@ -2,8 +2,7 @@ package models;
 
 import play.db.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @SuppressWarnings("serial")
 @Entity
@@ -14,6 +13,8 @@ public class HopAddition extends Model
 	private int quantity;
 	private int additionTime;
 	private double ibu;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Hop hop;
 
 	protected HopAddition()

@@ -1,10 +1,6 @@
 angular.module('BrewingTools.controllers.recipe', [])
 
   .controller('RecipeListCtrl', ['$scope','$location', function ($scope, $location) {
-    // $scope.recipes = new kendo.data.DataSource({
-    //   data: [ {'brewName': 'rage', 'style': 'ale'}, {'brewName': 'rage2', 'style': 'ale'}, {'brewName': 'rage3', 'style': 'pale'}, {'brewName': 'rage4', 'style': 'pale'} ]
-    // });
-    // $scope.recipes = [ {'brewName': 'rage', 'style': 'ale'}, {'brewName': 'rage2', 'style': 'ale'}, {'brewName': 'rage3', 'style': 'pale'}, {'brewName': 'rage4', 'style': 'pale'}];
     $scope.recipes = new kendo.data.DataSource({
         transport: {
           read: "/rest/recipes"
@@ -16,6 +12,7 @@ angular.module('BrewingTools.controllers.recipe', [])
     };
 
     $scope.onSelection = function(e) {
+      console.log(e);
       $location.path($location.path() + '/' + e.sender._data[0].id);
     };
 
@@ -66,8 +63,8 @@ angular.module('BrewingTools.controllers.recipe', [])
       $scope.saveAction = 'Update';
       RecipeService.get({id: $routeParams.recipeId}, function (data) {
         $scope.recipe = data;
-        console.log(data.hops);
-        console.log($scope.recipe);
+        // console.log(data.hops);
+        // console.log($scope.recipe);
         $scope.hopAdditions.data(data.hops);
 
       });

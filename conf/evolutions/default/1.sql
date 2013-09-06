@@ -11,6 +11,7 @@ create table hop (
 create table hop_addition (
   id                        bigint not null,
   recipe_id                 bigint not null,
+  hop_id                    bigint not null,
   quantity                  integer,
   addition_time             integer,
   ibu                       double,
