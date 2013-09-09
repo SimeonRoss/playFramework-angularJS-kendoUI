@@ -87,9 +87,18 @@ angular.module('BrewingTools.controllers.recipe', [])
       $scope.recipe.hops = $scope.hopAdditions.data();
       $scope.saveAction = 'Saving...';
       $scope.saving = true;
-      RecipeService.post($scope.recipe, function (data) {
-        $scope.navigate('/recipes');
-      });
+
+      if ($scope.recipe.id == null)
+      {
+        RecipeService.post($scope.recipe, function (data) {
+          $scope.navigate('/recipes');
+        });  
+      } else 
+      {
+        RecipeService.put($scope.recipe, function (data) {
+          $scope.navigate('/recipes');
+        });
+      }     
     };
   }])
 

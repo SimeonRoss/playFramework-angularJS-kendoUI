@@ -61,6 +61,30 @@ public class RecipeController extends Controller
 		return ok(result);
 	}
 
+    @BodyParser.Of(BodyParser.Json.class)
+	public static Result updateRecipe(Long id)
+	{
+		JsonNode json = request().body().asJson();
+        Recipe recipe;
+		if (json == null)
+		{
+			return badRequest("Expecting Json data");
+		}
+		try
+		{
+			recipe = mapper.readValue(json, Recipe.class);
+		} catch (IOException e)
+		{
+			return badRequest("Cannot read recipe");
+		}
+		recipe.update();
+
+		ObjectNode result = Json.newObject();
+		result.put("id", recipe.getId());
+
+		return ok(result);
+	}
+
 	public static Result deleteRecipe(Long id)
 	{
 		Recipe.delete(id);

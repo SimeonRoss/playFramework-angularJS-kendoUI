@@ -14,7 +14,10 @@ public class HopAddition extends Model
 	private int additionTime;
 	private double ibu;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
+    private Recipe parentRecipe;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     private Hop hop;
 
 	protected HopAddition()

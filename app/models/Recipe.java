@@ -4,10 +4,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import play.db.ebean.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -27,7 +24,7 @@ public class Recipe extends Model
     private String style;
 	private String brewName;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<HopAddition> hopAdditions;
 
 	public static Finder<Long, Recipe> find = new Finder<Long, Recipe>(Long.class, Recipe.class);
