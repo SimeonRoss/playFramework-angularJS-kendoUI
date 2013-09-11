@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Hop  extends Model
 {
-    public static Finder<Long, Hop> find = new Finder<>(Long.class, Hop.class);
+    public static Finder<Long, Hop> find = new Finder<Long, Hop>(Long.class, Hop.class);
 
     public static List<Hop> all() {
         return find.all();
