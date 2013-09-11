@@ -15,7 +15,7 @@ angular.module('BrewingTools.controllers', [])
   }])
 
   .controller('AboutController', ['$scope', function($scope) {       
-
+    
   }])
 
   .controller('AbvController', ['$scope', 'AbvCalculator', function($scope, AbvCalculator) {

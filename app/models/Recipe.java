@@ -21,10 +21,13 @@ public class Recipe extends Model
 	private double ibus;
 	private String og;
 	private String fg;
-    private String style;
 	private String brewName;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    private Style style;
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "parent_recipe_id")
 	private List<HopAddition> hopAdditions;
 
 	public static Finder<Long, Recipe> find = new Finder<Long, Recipe>(Long.class, Recipe.class);
@@ -160,11 +163,13 @@ public class Recipe extends Model
 		this.hopAdditions = hopAdditions;
 	}
 
-    public String getStyle() {
+    public Style getStyle() {
         return style;
     }
 
-    public void setStyle(String style) {
+    @JsonProperty("style")
+    @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+    public void setStyle(Style style) {
         this.style = style;
     }
 }
