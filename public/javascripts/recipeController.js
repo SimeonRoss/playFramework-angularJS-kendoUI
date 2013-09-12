@@ -27,7 +27,7 @@ angular.module('BrewingTools.controllers.recipe', [])
         model: { id: "Code" }
       },
       sort: {
-        field: "SubCategory",
+        field: "subCategory",
         dir: "asc"
       }
     });    
