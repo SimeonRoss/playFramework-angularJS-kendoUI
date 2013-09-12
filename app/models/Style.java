@@ -4,9 +4,16 @@ import play.db.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class Style extends Model {
+
+    public static Finder<Long, Style> find = new Finder<Long, Style>(Long.class, Style.class);
+
+    public static List<Style> all() {
+        return find.all();
+    }
 
     @Id
     private String code;

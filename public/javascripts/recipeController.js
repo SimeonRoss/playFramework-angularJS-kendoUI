@@ -16,17 +16,12 @@ angular.module('BrewingTools.controllers.recipe', [])
       var selectedRows = grid.select();
       $location.path($location.path() + '/' + grid.dataItem(selectedRows[0]).id);      
     };
-
-    $scope.getThis = function (f) {
-      console.log(f);
-      return 'mary';
-    }
   }])
 
   .controller('RecipeController', ['$scope', '$routeParams', 'AbvCalculator', 'RecipeService', 'Hops', function($scope, $routeParams, AbvCalculator, RecipeService, Hops) {
     $scope.styles = new kendo.data.DataSource({
       transport: {
-        read: "/assets/data/styles.json"
+        read: "/rest/styles"
       },
       schema: {
         model: { id: "Code" }
@@ -66,18 +61,10 @@ angular.module('BrewingTools.controllers.recipe', [])
       $scope.saveAction = 'Update';
       RecipeService.get({id: $routeParams.recipeId}, function (data) {
         $scope.recipe = data;
-        // console.log(data.hops);
-        // console.log($scope.recipe);
         $scope.hopAdditions.data(data.hops);
-
       });
     }
 
-
-    $scope.$watch('recipe.style', function() {
-      console.log($scope.recipe);
-    }, true);
-    
     $scope.$watch('hopAdditions', function() {
       $scope.recipe.ibus = 0; 
       angular.forEach($scope.hopAdditions.data(), function(value, key) {
@@ -119,7 +106,6 @@ angular.module('BrewingTools.controllers.recipe', [])
 
     $scope.showForm = function() {
       $scope.formActive = true;
-      console.log($scope.recipe);
     };
 
     $scope.done = function() {
