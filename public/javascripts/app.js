@@ -37,6 +37,10 @@ var brewingTools = angular.module('BrewingTools', ['ngResource', 'kendo.directiv
 		      controller: 'RecipeController',
 		      templateUrl: '/assets/partial/recipe.html'
 		    }).
+		    when('/tests', {
+		      controller: 'TestsController',
+		      templateUrl: '/assets/partial/tests.html'
+		    }).		    
 		    otherwise({
 		      redirectTo: '/'
 		    });

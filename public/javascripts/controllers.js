@@ -3,7 +3,8 @@ angular.module('BrewingTools.controllers', [])
   .controller('MenuController', ['$scope', '$location', function($scope, $location) {
     $scope.menuItems = [{url: '/', name: 'About'},
                         {url: '/abv',       name: 'ABV Calculator'},
-                        {url: '/recipes',   name: 'Recipes'}];
+                        {url: '/recipes',   name: 'Recipes'},
+                        {url: '/tests',   name: 'Testing'}];
 
 
     $scope.isActive = function(url)
@@ -13,6 +14,10 @@ angular.module('BrewingTools.controllers', [])
   }])
 
   .controller('AboutController', ['$scope', function($scope) {       
+    
+  }])
+
+  .controller('TestsController', ['$scope', function($scope) {       
     
   }])
 
